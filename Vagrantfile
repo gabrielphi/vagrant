@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "ansible" do |ansible|
-    ansible.vm.provision "shell", inline: $script
+    ansible.vm.provision "shell", inline: $script2
     ansible.vm.provider "virtualbox" do |v1|
 
       v1.memory = 4096
