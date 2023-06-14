@@ -1,0 +1,26 @@
+hosts: server
+become: yes
+tasks:
+  - name: Instalando Pacotes
+  package:
+    name: 
+    - openssl-devel
+    - nodejs
+    state: present
+  
+  - name: Instalando PM2 (NPM)
+    community.general.npm:
+    name: pm2@latest
+    global: true
+    state: present
+  
+  - name: Instalação Foundry
+  shell: 
+    cmd: mkdir -p /home/foundry/foundryuserdata
+    cmd: mkdir -p /home/foundry/foundryuser
+    cmd: wget --output-document /home/foundry/foundryvtt.zip "https://foundryvtt.s3.amazonaws.com/releases/11.301/FoundryVTT-11.301.zip?AWSAccessKeyId=AKIA2KJE5YZ3BCQQ6DH3&Signature=MN7UXi08yjxckYAsvmUFDlYs5j8%3D&Expires=1686773477"
+    cmd: unzip /home/foundry/foundryvtt.zip -d /home/foundry/foundryuser/
+    cmd: rm -f /home/foundry/foundryvtt.zip
+    cmd: pm2 start "node /home/foundry/foundryuser/resources/app/main.js --dataPath=/home/foundry/foundryuserdata" --name foundry
+  
+
