@@ -16,6 +16,7 @@ systemctl reload sshd
 useradd ansible
 echo "batata" | passwd ansible --stdin
 echo "ansible ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+yum install -y ansible
 ip addr
 SCRIPT
 
